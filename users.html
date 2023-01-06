@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users</title>
+</head>
+<body>
+  <center>
+    <h1>Messages from users!</h1>
+    <div class="container">
+      <!--
+      <table>
+        <thead>
+          <td><h3>Full Name</h3></td>
+          <td><h3>Email</h3></td>
+          <td><h3>Message</h3></td>
+        </thead>
+        <tr>
+          <td class="name"></td>
+          <td class="email"></td>
+          <td class="message"></td>
+        </tr>
+      </table>
+      -->
+    </div>
+  </center>
+  <script>
+  
+    const div = document.createElement('div')
+          const table = document.createElement('table')
+          //appending table to div
+          div.appendChild(table)
+          //creating thead element and appending to table
+          const thead = document.createElement('thead')
+          table.appendChild(thead)
+          //creating td and appending h3
+          const td1 = document.createElement('td')
+          const td2 = document.createElement('td')
+          const td3 = document.createElement('td')
+          const h31 = document.createElement('h3')
+          const h32 = document.createElement('h3')
+          const h33 = document.createElement('h3')
+          td1.appendChild(h31)
+          td2.appendChild(h32)
+          td3.appendChild(h33)
+          //appending td to thead
+          thead.appendChild(td1)
+          thead.appendChild(td2)
+          thead.appendChild(td3)
+          //creating a node list and appending to h3
+          const fullname = document.createTextNode("FullName")
+          //appending to h3
+          h31.appendChild(fullname)
+          const email = document.createTextNode("Email")
+          //appending to h3
+          h32.appendChild(email)
+          const message = document.createTextNode("Messages")
+          //appending to h3
+          h33.appendChild(message)
+
+   
+
+    const datas = fetch('https://get-tutorial.daniel-ayesuaye.repl.co/messages', {
+      method: "GET"
+    })
+    .then(response => response.json())
+    .then(data => {
+      data.forEach((data) => {
+        //name.textContent = data.fullname
+        //email.textContent = data.email
+        //message.textContent = data.message
+
+        const tr = document.createElement("tr")
+        const name = document.createElement("td")
+        const email = document.createElement("td")
+        const message = document.createElement("td")
+        const btn = document.createElement("button")
+        tr.appendChild(name)
+        tr.appendChild(email)
+        tr.appendChild(message)
+        tr.appendChild(btn)
+
+        btn.addEventListener('click', () => {
+          const endpoint = `/users/${data._id}`
+
+          fetch(endpoint, {
+            method: "DELETE"
+          })
+            .then((response) => response.json())
+            .then((data) => window.location.href = data.redirect)
+            .catch((err) => console.error(err))
+        })
+        
+        btn.textContent = "Remove User!"
+        name.textContent = data.fullname
+        email.textContent = data.email
+        message.textContent = data.message
+        table.appendChild(tr)
+          const containerDiv = document.querySelector(".container")
+          containerDiv.appendChild(div)
+    
+      })
+    })
+    .catch(err => console.log(err))
+  </script>
+</body>
+</html>

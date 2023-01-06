@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <center>
+      <h1>Express File Upload</h1>
+       <form action="https://GET-tutorial.daniel-ayesuaye.repl.co/uploads" enctype="multipart/form-data" method="post">
+        <input type="file" name="myfile"/>
+        <input class="submit" type="submit" value="Upload image" name="submit"/>
+      </form>
+      <p id="success"></p>
+    </center>
+    <script>
+      const submit = document.querySelector('.submit')
+      submit.addEventListener('click', () => {
+       const success = document.getElementById('success')
+        success.innerText = "File Uploaded Successfully!"
+      })
+    </script>
+  </body>
+</html>
