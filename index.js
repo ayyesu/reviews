@@ -3,13 +3,14 @@ const multer = require("multer")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const Joi = require("joi")
+const dotenv = require("dotenv")
 const { Reachout } = require('./models/reachout')
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(express.static('js'));
-
+dotenv.config({ path: './.env'})
 
 mongoose.set('strictQuery', true);
 //Setting destination and filename for uploaded files
@@ -109,8 +110,10 @@ app.delete('/users/:id', async (req, res) => {
   }
 })
 
-const connection_string = "mongodb+srv://ayyesu:wasbornin2002@cluster0.gmnbus2.mongodb.net/test?retryWrites=true&w=majority"
+const connection_string = process.env.MONGODB_URL
+
 mongoose.connect(connection_string, {
+  useNewUrlParser: true,
   useUnifiedTopology: true,
 })
   .then(() => {
