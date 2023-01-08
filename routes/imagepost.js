@@ -2,9 +2,8 @@ const express = require("express")
 const multer = require("multer")
 
 const router = express.Router()
-const app = express()
 
-app.get('/uploads', (req, res) => {
+router.get('/uploads', (req, res) => {
     res.sendFile(__dirname + '/imagepost.html')
 })
 
@@ -20,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage }).single('myfile')
 
-app.post('/uploads', (req, res) => {
+router.post('/uploads', (req, res) => {
   upload(req, res, (err) => {
     if (err) return res.end("Error uploading file!!")
     console.log("File Uploaded successfully")

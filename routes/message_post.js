@@ -1,11 +1,10 @@
 const express = require("express")
 const { Reachout } = require('../models/reachout')
 const Joi = require("joi")
-const app = express()
 
 const router = express.Router()
 
-app.post('/postResponse', async (req, res) => {
+router.post('/postResponse', async (req, res) => {
     const schema = Joi.object({
       fullname: Joi.string().min(4).max(200).required(),
       email: Joi.string().email().min(9).max(100).required(),

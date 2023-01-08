@@ -1,10 +1,9 @@
 const express = require("express")
 const { Reachout } = require('../models/reachout')
 
-const app = express()
 const router = express.Router()
 
-app.get('/messages', async (req, res) => {
+router.get('/messages', async (req, res) => {
     try {
       const messages = await Reachout.find().sort({ date: -1 })
       res.send(messages)
@@ -14,7 +13,7 @@ app.get('/messages', async (req, res) => {
     }
   })
   
-  app.get('/messages/:id', async (req, res) => {
+  router.get('/messages/:id', async (req, res) => {
     try {
       const message = await Reachout.findById(req.params.id)
       res.send(message)
@@ -24,7 +23,7 @@ app.get('/messages', async (req, res) => {
     }
   })
 
-  app.delete('/users/:id', async (req, res) => {
+  router.delete('/users/:id', async (req, res) => {
     try {
       const id = req.params.id
       await Reachout.findByIdAndDelete(id)
