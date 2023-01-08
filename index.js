@@ -10,7 +10,7 @@ const messagePost = require("./routes/message_post")
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static('public'));
 dotenv.config({ path: './.env'})
 
 app.use("/imagepost", imagePost)
