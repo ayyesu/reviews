@@ -6,3 +6,4 @@ Implementing nodejs backend concepts
 - [x] READ
 - [ ] UPDATE
 - [x] DELETE  
+- [x] Routes and Static file rendering
