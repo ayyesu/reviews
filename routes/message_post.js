@@ -5,10 +5,6 @@ const app = express()
 
 const router = express.Router()
 
-app.get('/users', (req, res) => {
-    res.sendFile(__dirname + "/users.html")
-})
-
 app.post('/postResponse', async (req, res) => {
     const schema = Joi.object({
       fullname: Joi.string().min(4).max(200).required(),

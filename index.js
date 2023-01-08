@@ -10,7 +10,7 @@ const messagePost = require("./routes/message_post")
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(express.static('public'));
+app.use(express.static(`${__dirname}/public`));
 dotenv.config({ path: './.env'})
 
 app.use("/imagepost", imagePost)
@@ -21,7 +21,11 @@ mongoose.set('strictQuery', true);
 
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile('/index.html')
+})
+
+app.get('/users', (req, res) => {
+  res.sendFile(`${__dirname}/public/users.html`)
 })
 
 const connection_string = process.env.MONGODB_URL
